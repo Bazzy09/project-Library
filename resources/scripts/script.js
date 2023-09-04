@@ -53,18 +53,23 @@ function removeBook(event) {
 }
 
 document.getElementById('new-book-btn').addEventListener('click', () => {
-  const title = prompt('Enter book title:');
-  const author = prompt('Enter author:');
-  const pages = prompt('Enter number of pages:');
-  const read = confirm('Have you read this book?');
+  const addBookForm = document.getElementById('add-book-form');
+  addBookForm.style.display = 'block';
 
-  const newBook = new Book(title, author, pages, read);
-  addBookToLibrary(newBook);
-  render();
+  const bookForm = document.getElementById('book-form');
+  bookForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').checked;
+
+    const newBook = new Book(title, author, pages, read);
+    addBookToLibrary(newBook);
+    render();
+
+    bookForm.reset();
+    addBookForm.style.display = 'none';
+  });
 });
-
-const book1 = new Book('Why Acts they you do', 'Tim Lahaye', 279, true);
-const book2 = new Book('Five Love language', 'Gary Chapman', 271, true);
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-render();
