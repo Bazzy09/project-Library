@@ -1,4 +1,5 @@
-const myLibrary = [];
+const storedLibrary = localStorage.getItem('library');
+const myLibrary = storedLibrary ? JSON.parse(storedLibrary) : [];
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -9,6 +10,21 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  updateLocalStorage();
+}
+
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  updateLocalStorage();
+}
+
+function toggleReadStatus(index) {
+  myLibrary[index].read = !myLibrary[index].read;
+  updateLocalStorage();
+}
+
+function updateLocalStorage() {
+  localStorage.setItem('library', JSON.stringify(myLibrary));
 }
 
 function render() {
@@ -31,25 +47,21 @@ function render() {
 
   const toggleReadButtons = document.querySelectorAll('.toggle-read-btn');
   toggleReadButtons.forEach(button => {
-    button.addEventListener('click', toggleReadStatus);
+    button.addEventListener('click', event => {
+      const index = event.target.dataset.index;
+      toggleReadStatus(index);
+      render();
+    });
   });
 
   const removeButtons = document.querySelectorAll('.remove-book-btn');
   removeButtons.forEach(button => {
-    button.addEventListener('click', removeBook);
+    button.addEventListener('click', event => {
+      const index = event.target.dataset.index;
+      removeBook(index);
+      render();
+    });
   });
-}
-
-function toggleReadStatus(event) {
-  const index = event.target.dataset.index;
-  myLibrary[index].read = !myLibrary[index].read;
-  render();
-}
-
-function removeBook(event) {
-  const index = event.target.dataset.index;
-  myLibrary.splice(index, 1);
-  render();
 }
 
 document.getElementById('new-book-btn').addEventListener('click', () => {
@@ -59,7 +71,7 @@ document.getElementById('new-book-btn').addEventListener('click', () => {
   const bookForm = document.getElementById('book-form');
   bookForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
@@ -73,3 +85,5 @@ document.getElementById('new-book-btn').addEventListener('click', () => {
     addBookForm.style.display = 'none';
   });
 });
+
+render();
