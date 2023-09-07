@@ -1,49 +1,78 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-  }
-  
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 2rem;
-  }
-  
-  .library {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-  }
-  
-  .book-card {
-    border: 1px solid #ddd;
-    padding: 1rem;
-  }
-  
-  button {
-    background-color: orange;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    border-radius: 3em;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button:active {
-    background-color: #003b80;
-  }
-  
+h1 {
+  font-size: 24px;
+  margin: 20px 0;
+  text-align: center;
+  color: #333;
+}
+
+#new-book-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3em;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#add-book-form {
+  display: none;
+  max-width: 20vw;
+  max-height: 10hv;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#add-book-form h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333; 
+}
+
+#book-form label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+  color: #333; 
+}
+
+#book-form input[type="text"],
+#book-form input[type="number"],
+#book-form input[type="checkbox"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#book-form button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 3em;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.library {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.book-card {
+  max-width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
+}
